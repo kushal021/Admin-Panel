@@ -5,7 +5,7 @@ import { Avatar, Button, TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useUserAuth} from '../context/UserAuthContext'
+import { useUserAuth} from './UserAuthContext'
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -17,7 +17,7 @@ function Login() {
   const paperStyle = {
     width: 380,
     margin: "20px auto",
-    height: "60vh",
+    height: "58vh",
   };
 
   const handleSubmit = async (e) => {
@@ -72,8 +72,11 @@ function Login() {
             >
               LOG IN
             </Button>
-            <Typography variant="h6"> New User?</Typography>
-            {/* <Link to='/signup'>Register</Link> */}
+            <br/>
+            <Typography variant="p" gutterBottom> New User?  </Typography>
+            
+            <Link to='/signup' style={{textDecoration: 'none'}} >Create an account</Link>
+            
           </Grid>
         </Paper>
       </Grid>

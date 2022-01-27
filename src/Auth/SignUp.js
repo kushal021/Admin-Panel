@@ -5,7 +5,7 @@ import { Avatar, Button, TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useUserAuth} from '../context/UserAuthContext'
+import { useUserAuth} from './UserAuthContext'
 
 function SignUp() {
 
@@ -18,7 +18,7 @@ function SignUp() {
     const paperStyle = {
         width: 380,
         margin: "20px auto",
-        height: "60vh",
+        height: "58vh",
       };
 
 
@@ -75,8 +75,11 @@ function SignUp() {
           >
             SIGN UP
           </Button>
-          <Typography variant="h6"> Already have an account?</Typography>
-          {/* <Link to='/signup'>Log In</Link> */}
+          <br />
+          <Typography variant="p" gutterBottom> Already have an account?  </Typography>
+          
+          <Link to='/login' style={{textDecoration: 'none'}} >Log In</Link>
+          
         </Grid>
       </Paper>
     </Grid>

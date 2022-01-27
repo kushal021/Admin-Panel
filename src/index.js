@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { UserAuthContextProvider } from './context/UserAuthContext';
+import { UserAuthContextProvider } from './Auth/UserAuthContext';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import SignUp from './Auth/SignUp';
 import Login from './Auth/Login';
+import ProtectedRoute from './Auth/ProtectedRoute'
 
 
 
@@ -13,7 +14,7 @@ ReactDOM.render(
   <UserAuthContextProvider>
   <Routes>
     <Route>
-    <Route path="/" element={<App />} />
+    <Route path="/" element={<ProtectedRoute><App /></ProtectedRoute>} />
     <Route path="/login" element={<Login />} />
     <Route path="/signup" element={<SignUp />} />
     </Route>
