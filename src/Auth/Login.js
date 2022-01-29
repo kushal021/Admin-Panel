@@ -1,20 +1,30 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Avatar, Button, TextField, Typography } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useUserAuth} from './UserAuthContext'
+import { useUserAuth } from './UserAuthContext'
 
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  const {logIn, user} = useUserAuth();
+  const { logIn, user } = useUserAuth();
   const nav = useNavigate();
 
+  useEffect(() => {
+    const check = () => {
+      if (user) {
+        return nav('/')
+      }
+    }
+    check()
+  }, [])
+
   const paperStyle = {
+    paddingTop:"10px",
     width: 380,
     margin: "20px auto",
     height: "58vh",
@@ -24,10 +34,10 @@ function Login() {
     e.preventDefault();
     setError("");
     try {
-        await logIn(email, password);
-        nav("/");
+      await logIn(email, password);
+      nav("/");
     } catch (error) {
-      setError(error.message); 
+      setError(error.message);
     }
   };
 
@@ -36,7 +46,7 @@ function Login() {
       <Grid>
         <Paper elevation={10} style={paperStyle}>
           <Grid align="center">
-            <Avatar style={{ backgroundColor: "#1bbd7e" }}>
+            <Avatar style={{ backgroundColor: "#1bbd7e", marginBottom:"5px" }}>
               <AccountCircleIcon />
             </Avatar>
             <Typography variant="h4" gutterBottom>
@@ -72,11 +82,11 @@ function Login() {
             >
               LOG IN
             </Button>
-            <br/>
+            <br />
             <Typography variant="p" gutterBottom> New User?  </Typography>
-            
-            <Link to='/signup' style={{textDecoration: 'none'}} >Create an account</Link>
-            
+
+            <Link to='/signup' style={{ textDecoration: 'none' }} >Create an account</Link>
+
           </Grid>
         </Paper>
       </Grid>

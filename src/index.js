@@ -11,15 +11,15 @@ import ProtectedRoute from './Auth/ProtectedRoute'
 
 ReactDOM.render(
   <Router>
-  <UserAuthContextProvider>
-  <Routes>
-    <Route>
-    <Route path="/" element={<ProtectedRoute><App /></ProtectedRoute>} />
-    <Route path="/login" element={<Login />} />
-    <Route path="/signup" element={<SignUp />} />
-    </Route>
-  </Routes>
-  </UserAuthContextProvider>
+    <UserAuthContextProvider>
+      <Routes>
+        <Route>
+          <Route path="/" element={<ProtectedRoute><App /></ProtectedRoute>} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Route>
+      </Routes>
+    </UserAuthContextProvider>
   </Router>,
   document.getElementById('root')
 );
