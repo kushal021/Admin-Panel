@@ -13,7 +13,7 @@ export const SideBarData = [
         child: [{
             childKey: 21,
             childTitle: "Add Image",
-            path: '/'
+            path: '/addimage'
         },
         {
             childKey: 22,
@@ -27,7 +27,7 @@ export const SideBarData = [
         child: [{
             childKey: 31,
             childTitle: "Add Video",
-            path: '/'
+            path: '/addvideo'
         },
         {
 
@@ -42,7 +42,7 @@ export const SideBarData = [
         child: [{
             childKey: 41,
             childTitle: "Add Text",
-            path: '/'
+            path: '/addtext'
         },
         {
             childKey: 42,

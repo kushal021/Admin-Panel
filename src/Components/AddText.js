@@ -13,7 +13,7 @@ function AddText() {
 
   const paperStyle = {
     width: 380,
-    margin: "20px auto",
+    margin: "90px auto",
     height: "59vh",
     padding: "8px",
   };
