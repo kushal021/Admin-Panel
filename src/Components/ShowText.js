@@ -4,10 +4,12 @@ import {
     Typography,
 } from "@mui/material";
 import { Box } from "@mui/system";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { collection, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../Firebase";
 import Button from '@mui/material/Button'
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
 function ShowImage() {
     const [list, setList] = useState([]);
@@ -28,6 +30,15 @@ function ShowImage() {
         show();
     }, []);
 
+    const increaseLike = async (id, like) => {
+        var newLike = like + 1;
+        const ref = doc(db, 'image', id)
+        try {
+            await updateDoc(ref, { like: newLike })
+        } catch (error) {
+
+        }
+    }
     const deleteItem = async (id) => {
         const ref = doc(db, 'text', id)
         try {
@@ -58,13 +69,22 @@ function ShowImage() {
             }
       `}
                 </style>
-                {console.log(list)}
                 {list.map((item, index) => {
                     return (
                         <Box key={index}>
                             <Paper elevation={10} style={paperStyle}>
                                 <Typography variant="h6">{item.text}</Typography>
                                 <Typography variant="h6">{item.title}</Typography>
+                                <Box style={{ display: 'inline-block' }}>
+                                    <Button onClick={() => increaseLike(item.id, item.like)}>
+                                        <ThumbUpIcon /> {item.like}
+                                    </Button>
+                                </Box>
+                                <Box style={{ display: 'inline-block', margin: 'auto 5px' }}>
+                                    <Button >
+                                        <VisibilityIcon /> {12}
+                                    </Button>
+                                </Box>
                                 <Button variant='contained' color='error' onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) deleteItem(item.id) }}>
                                     Delete
                                 </Button>

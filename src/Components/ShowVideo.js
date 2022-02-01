@@ -1,15 +1,13 @@
-import {
-  Grid,
-  Paper,
-  Typography,
-} from "@mui/material";
-import { Box } from "@mui/system";
-import { collection, getDocs, deleteDoc, doc } from "firebase/firestore";
+import { Grid, Paper, Typography, } from "@mui/material";
+import { collection, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { db } from "../Firebase";
 import Button from '@mui/material/Button'
+import Box from '@mui/material/Box'
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import VisibilityIcon from '@mui/icons-material/Visibility';
 
-function ShowImage() {
+function ShowVideo() {
   const [list, setList] = useState([]);
 
 
@@ -27,6 +25,16 @@ function ShowImage() {
     };
     show();
   }, []);
+
+  const increaseLike = async (id, like) => {
+    var newLike = like + 1;
+    const ref = doc(db, 'video', id)
+    try {
+      await updateDoc(ref, { like: newLike })
+    } catch (error) {
+
+    }
+  }
 
   const deleteItem = async (id) => {
     const ref = doc(db, 'video', id)
@@ -58,7 +66,6 @@ function ShowImage() {
             }
       `}
         </style>
-        {console.log(list)}
         {list.map((item, index) => {
           return (
             <Box key={index}>
@@ -67,6 +74,16 @@ function ShowImage() {
                   <source src={item.video} type="video/mp4" />
                 </video>
                 <Typography variant="h6">{item.name}</Typography>
+                <Box style={{ display: 'inline-block' }}>
+                  <Button onClick={() => increaseLike(item.id, item.like)}>
+                    <ThumbUpIcon /> {item.like}
+                  </Button>
+                </Box>
+                <Box style={{ display: 'inline-block', margin: 'auto 5px' }}>
+                  <Button >
+                    <VisibilityIcon /> {12}
+                  </Button>
+                </Box>
                 <Button variant='contained' color='error' onClick={(e) => { if (window.confirm('Are you sure you wish to delete this item?')) deleteItem(item.id) }}>
                   Delete
                 </Button>
@@ -79,4 +96,4 @@ function ShowImage() {
   );
 }
 
-export default ShowImage;
+export default ShowVideo;

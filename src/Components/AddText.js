@@ -10,6 +10,7 @@ import { db } from "../Firebase";
 function AddText() {
   const [title, setTitle] = useState("");
   const [text, setText] = useState("");
+  const like = 0;
 
   const paperStyle = {
     width: 380,
@@ -24,6 +25,7 @@ function AddText() {
     await addDoc(ref, {
       title: title,
       text: text,
+      like: like
     });
 
     setTitle("");

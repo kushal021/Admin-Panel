@@ -23,6 +23,7 @@ const Input = styled("input")({
 function AddImage() {
   const [title, setTitle] = useState("");
   const [file, setFile] = useState("");
+  const like = 0;
 
   const paperStyle = {
     width: 380,
@@ -45,7 +46,7 @@ function AddImage() {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           console.log(url);
-          addDoc(reference, { name: title, image: url });
+          addDoc(reference, { name: title, image: url, like: like });
         });
       }
     );

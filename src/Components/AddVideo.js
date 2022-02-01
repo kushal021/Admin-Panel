@@ -23,7 +23,7 @@ const Input = styled("input")({
 function AddVideo() {
   const [title, setTitle] = useState("");
   const [file, setFile] = useState("");
-
+  const like = 0;
   const paperStyle = {
     width: 380,
     margin: "90px auto",
@@ -45,7 +45,7 @@ function AddVideo() {
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           console.log(url);
-          addDoc(reference, { name: title, video: url });
+          addDoc(reference, { name: title, video: url, like: like });
         });
       }
     );
