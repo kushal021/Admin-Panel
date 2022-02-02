@@ -1,30 +1,18 @@
 import { Grid, Paper, Typography, } from "@mui/material";
-import { collection, getDocs, deleteDoc, doc, updateDoc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import React from "react";
 import { db } from "../Firebase";
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
-function ShowVideo() {
-  const [list, setList] = useState([]);
-
+function ShowVideo({ list }) {
 
   const paperStyle = {
-
-    width: 320,
-
+    width: 350,
   };
 
-  useEffect(() => {
-    const ref = collection(db, "video");
-    const show = async () => {
-      const data = await getDocs(ref);
-      setList(data.docs.map((ls, index) => ({ ...ls.data(), id: ls.id })));
-    };
-    show();
-  }, []);
 
   const increaseLike = async (id, like) => {
     var newLike = like + 1;
@@ -51,12 +39,16 @@ function ShowVideo() {
       <Grid container spacing={2} className="grid">
         <style>
           {`
+          body{background: #BE93C5;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #7BC6CC, #BE93C5);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #7BC6CC, #BE93C5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      }
             .grid{
-              width: 90vw;
+              width: 100vw;
               max-width: 1170px;
               margin: 5rem auto;
               display: grid;
-              gap: 2rem;
+              gap: 5px;
             }
             @media screen and (min-width: 768px) {
               .grid {
@@ -70,7 +62,7 @@ function ShowVideo() {
           return (
             <Box key={index}>
               <Paper elevation={10} style={paperStyle}>
-                <video width="320" height="240" controls>
+                <video width="350" height="240" controls>
                   <source src={item.video} type="video/mp4" />
                 </video>
                 <Typography variant="h6">{item.name}</Typography>

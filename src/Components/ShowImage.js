@@ -1,23 +1,13 @@
-import { Card, CardContent, CardMedia, Grid, Link, Typography } from "@mui/material";
-import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import { Card, CardContent, CardMedia, Grid, Typography } from "@mui/material";
+import { doc, deleteDoc, updateDoc } from "firebase/firestore";
+import React from "react";
 import { db } from "../Firebase";
 import Button from '@mui/material/Button'
 import Box from '@mui/material/Box'
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 
-function ShowImage() {
-  const [list, setList] = useState([]);
-
-  useEffect(() => {
-    const ref = collection(db, "image");
-    const show = async () => {
-      const data = await getDocs(ref);
-      setList(data.docs.map((ls, index) => ({ ...ls.data(), id: ls.id })));
-    };
-    show();
-  }, []);
+function ShowImage({ list }) {
 
   const increaseLike = async (id, like) => {
     var newLike = like + 1;
@@ -43,12 +33,16 @@ function ShowImage() {
       <Grid container spacing={2} className="grid" >
         <style>
           {`
+          body{background: #BE93C5;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #7BC6CC, #BE93C5);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #7BC6CC, #BE93C5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      }
       .grid{
-        width: 90vw;
+        width: 1100px;
   max-width: 1170px;
   margin: 5rem auto;
   display: grid;
-  gap: 2rem;
+  gap: 8px;
 }
 @media screen and (min-width: 768px) {
   .grid {
@@ -58,14 +52,14 @@ function ShowImage() {
       }
       `}
         </style>
-        {list.map((item, id) => {
+        {list?.map((item, id) => {
           return (
             <Grid item xs={12} md={8} key={id}>
-              <Card sx={{ maxWidth: 345 }}>
-                <Link to={`${id}`} style={{ textDecoration: "none" }}>
+              <Card sx={{ maxWidth: 345, width:'350px' }}>
                   <CardMedia
                     component="img"
-                    height="140"
+                    height="190"
+                    width="300px"
                     image={item.image}
                     alt="green iguana"
                   />
@@ -87,7 +81,6 @@ function ShowImage() {
                       Delete
                     </Button>
                   </CardContent>
-                </Link>
               </Card>
             </Grid>
           )

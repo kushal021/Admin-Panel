@@ -9,16 +9,15 @@ import AddVideo from './Components/AddVideo'
 import AddText from './Components/AddText'
 import SideBar from './Drawer/SideBar'
 import Grid from '@mui/material/Grid'
-import ShowImages from './Components/ShowImage'
-import ShowVideos from './Components/ShowVideo'
-import ShowTexts from './Components/ShowText'
 import Home from './Components/Home'
 import { useUserAuth } from './Auth/UserAuthContext'
+import PaginationImage from './Pagination/PaginationImage'
+import PaginationVideo from './Pagination/PaginationVideo'
+import PaginationText from './Pagination/PaginationText'
 
 function App() {
 
   const { user } = useUserAuth();
-  console.log(user)
   const [isUser, setIsUser] = useState(false)
 
   useEffect(() => {
@@ -35,6 +34,7 @@ function App() {
 
 
   return (
+    <>
     <Router>
       <UserAuthContextProvider>
         <Grid container spacing={6}>
@@ -48,9 +48,9 @@ function App() {
                 <Route path="/addimage" element={<ProtectedRoute><AddImage /></ProtectedRoute>} />
                 <Route path="/addvideo" element={<ProtectedRoute><AddVideo /></ProtectedRoute>} />
                 <Route path="/addtext" element={<ProtectedRoute><AddText /></ProtectedRoute>} />
-                <Route path="/showimages" element={<ProtectedRoute><ShowImages /></ProtectedRoute>} />
-                <Route path="/showvideos" element={<ProtectedRoute><ShowVideos /></ProtectedRoute>} />
-                <Route path="/showtexts" element={<ProtectedRoute><ShowTexts /></ProtectedRoute>} />
+                <Route path="/showimages" element={<ProtectedRoute><PaginationImage /></ProtectedRoute>} />
+                <Route path="/showvideos" element={<ProtectedRoute><PaginationVideo /></ProtectedRoute>} />
+                <Route path="/showtexts" element={<ProtectedRoute><PaginationText /></ProtectedRoute>} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<SignUp />} />
               </Route>
@@ -59,6 +59,7 @@ function App() {
         </Grid>
       </UserAuthContextProvider>
     </Router>
+    </>
   )
 }
 
