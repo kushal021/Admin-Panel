@@ -14,7 +14,10 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 function ShowImage({ list }) {
 
     const paperStyle = {
-        width: 320,
+        width: '94%',
+        marginLeft: '50px',
+        marginBottom: '10px',
+        padding:'5px'
     };
 
     const increaseLike = async (id, like) => {
@@ -38,35 +41,22 @@ function ShowImage({ list }) {
 
     return (
         <>
-            <Grid container spacing={2} className="grid">
+            <Grid container spacing={2} className="grid" style={{ marginTop: '75px' }}>
                 <style>
                     {`
                     body{background: #BE93C5;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #7BC6CC, #BE93C5);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #7BC6CC, #BE93C5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
       }
-            .grid{
-              width: 90vw;
-              max-width: 1170px;
-              margin: 5rem auto;
-              display: grid;
-              gap: 2rem;
-            }
-            @media screen and (min-width: 768px) {
-              .grid {
-                grid-template-columns: repeat(3, 1fr);
-              }
-            }
-            }
       `}
                 </style>
                 {list.map((item, index) => {
                     return (
                         <Box key={index}>
                             <Paper elevation={10} style={paperStyle}>
+                                <Typography variant="h5" style={{ color: 'violet' }}>{item.title}</Typography>
                                 <Typography variant="h6">{item.text}</Typography>
-                                <Typography variant="h6">{item.title}</Typography>
-                                <Box style={{ display: 'inline-block' }}>
+                                <Box>
                                     <Button onClick={() => increaseLike(item.id, item.like)}>
                                         <ThumbUpIcon /> {item.like}
                                     </Button>
